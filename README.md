@@ -8,6 +8,11 @@
 
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![Project Status: Active](https://img.shields.io/badge/status-active-success.svg)](https://github.com/THECODERSKYT/PingPro/)
+[![Python Version](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Termux-lightgrey.svg)](https://github.com/THECODERSKYT/PingPro/)
+[![GitHub stars](https://img.shields.io/github/stars/THECODERSKYT/PingPro?style=social)](https://github.com/THECODERSKYT/PingPro/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/THECODERSKYT/PingPro?style=social)](https://github.com/THECODERSKYT/PingPro/network/members)
 
 **Live Website & Installer: [pingpro.vercel.app](https://pingpro.vercel.app/)**
 
