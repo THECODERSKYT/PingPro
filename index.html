@@ -3,219 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PingerPro - Your Ultimate Website Monitoring Tool</title>
+    <title>PingerPro - Simple & Powerful Website Monitoring</title>
     
-    <!-- CSS और JavaScript सब कुछ इसी फ़ाइल में है -->
     <style>
-        /* --- गूगल फ़ॉन्ट --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-        /* --- CSS वेरिएबल्स (रंग बदलने के लिए) --- */
         :root {
             --bg-dark: #121212;
             --bg-light: #1e1e1e;
             --primary-color: #00aaff;
+            --termux-color: #4caf50; /* Termux के लिए हरा रंग */
             --text-light: #e0e0e0;
             --text-dark: #a0a0a0;
             --border-color: #333333;
+            --code-bg: #1a1a1a;
         }
-
-        /* --- बेसिक स्टाइलिंग --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
-            line-height: 1.6;
+            line-height: 1.7;
         }
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 2rem;
-        }
-
-        h1, h2 {
-            font-weight: 600;
-            color: white;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        p {
-            color: var(--text-dark);
-        }
-        
-        /* --- हेडर और हीरो सेक्शन --- */
+        .container { max-width: 1100px; margin: auto; padding: 0 2rem; }
+        h1, h2, h3 { font-weight: 600; color: white; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; color: var(--primary-color); }
+        p { color: var(--text-dark); margin-bottom: 1rem; }
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 1rem;
+            padding: 2rem 1rem;
             position: relative;
             overflow: hidden;
         }
-        
-        /* बैकग्राउंड एनिमेशन */
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(45deg, #0d1a26, #121212, #260d1a);
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
-            z-index: -1;
+            animation: gradientAnimation 15s ease infinite; z-index: -1;
         }
+        @keyframes gradientAnimation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; color: var(--text-dark); }
         
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* --- नया इंस्टॉलेशन ऑप्शंस --- */
+        .install-options {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 900px;
         }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-        
-        /* --- इंस्टॉलेशन कोड बॉक्स --- */
         .install-box {
             background-color: var(--bg-light);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 1.5rem 2rem;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .install-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 0.8rem;
+        }
+        .install-box.termux h3 {
+            border-left-color: var(--termux-color);
+        }
+        .command-line {
+            background: var(--code-bg);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .install-box code {
+        .command-line code {
             font-family: 'Courier New', Courier, monospace;
             color: var(--text-light);
             font-size: 0.9rem;
             word-break: break-all;
         }
-        
         .copy-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.7rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
+            background: var(--primary-color); color: white; border: none; padding: 0.6rem 0.9rem;
+            border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s ease;
+            margin-left: 1rem; flex-shrink: 0;
         }
-        .copy-btn:hover {
-            background: #0088cc;
+        .copy-btn:hover { background: #0088cc; }
+        .install-box.termux .copy-btn {
+            background: var(--termux-color);
         }
-
-        /* --- सेक्शन्स की स्टाइलिंग --- */
-        .section {
-            padding: 6rem 0;
+        .install-box.termux .copy-btn:hover {
+            background: #3e8e41;
         }
 
-        /* --- फीचर्स ग्रिड --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: var(--bg-light);
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 170, 255, 0.1);
-        }
-        .feature-card .icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* --- प्रॉम्प्ट सेक्शन --- */
-        .prompt-placeholder {
-            background-color: rgba(0, 170, 255, 0.05);
-            border: 2px dashed var(--primary-color);
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-        .prompt-placeholder p {
-            font-size: 1.1rem;
-        }
-
-        /* --- स्क्रॉल पर एनिमेशन के लिए --- */
-        .hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* --- Responsive --- */
+        .section { padding: 6rem 0; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .feature-card { background: var(--bg-light); padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0, 170, 255, 0.1); }
+        .feature-card .icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .usage-section h3 { font-size: 1.8rem; margin-top: 3rem; margin-bottom: 1rem; color: var(--text-light); }
+        pre { background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; color: #d0d0d0; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; }
+        pre code { color: #aaffaa; }
+        footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border-color); color: var(--text-dark); }
+        .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .visible { opacity: 1; transform: translateY(0); }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero .subtitle { font-size: 1rem; }
             h2 { font-size: 2rem; }
-            .install-box { flex-direction: column; gap: 1rem; }
+            .install-options { flex-direction: column; }
+            .command-line code { font-size: 0.8rem; }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- हीरो सेक्शन (पहला भाग जो दिखता है) -->
+    <!-- हीरो सेक्शन -->
     <header class="hero">
         <div class="container">
             <h1>PingerPro</h1>
-            <p>The simple, powerful, and open-source tool to monitor your websites and services 24/7. Never let your projects sleep again.</p>
-            <div class="install-box">
-                <code id="install-command">curl -fsSL https://pingpro.vercel.app/install.sh | sudo bash</code>
-                <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+            <p class="subtitle">A simple, powerful, and open-source tool to monitor your websites and services 24/7. Never let your projects sleep again.</p>
+            
+            <!-- !!!  यहाँ बदलाव किया गया है  !!! -->
+            <div class="install-options">
+                <!-- Linux के लिए बॉक्स -->
+                <div class="install-box linux">
+                    <h3>For Linux (Ubuntu, Debian, Arch, etc.)</h3>
+                    <div class="command-line">
+                        <code id="install-command-linux">curl -fsSL https://pingpro.vercel.app/install.sh | sudo bash</code>
+                        <button class="copy-btn" onclick="copyToClipboard('install-command-linux', this)">Copy</button>
+                    </div>
+                </div>
+                <!-- Termux के लिए बॉक्स -->
+                <div class="install-box termux">
+                    <h3>For Termux (on Android)</h3>
+                    <div class="command-line">
+                        <code id="install-command-termux">curl -fsSL https://pingpro.vercel.app/install.sh | bash</code>
+                        <button class="copy-btn" onclick="copyToClipboard('install-command-termux', this)">Copy</button>
+                    </div>
+                </div>
             </div>
+            <!-- !!!  बदलाव का अंत  !!! -->
+
         </div>
     </header>
 
@@ -223,7 +162,7 @@
         <!-- फीचर्स सेक्शन -->
         <section id="features" class="section">
             <div class="container">
-                <h2>Why Choose PingerPro?</h2>
+                <h2 class="hidden">Why Choose PingerPro?</h2>
                 <div class="features-grid">
                     <div class="feature-card hidden">
                         <div class="icon">💻</div>
@@ -231,67 +170,78 @@
                         <p>Use it in your server's terminal or as a user-friendly desktop application. Your choice.</p>
                     </div>
                     <div class="feature-card hidden">
+                        <div class="icon">⚙️</div>
+                        <h3>Smart Installer</h3>
+                        <p>A single command intelligently installs PingerPro on Debian, Ubuntu, Arch Linux, and even Termux.</p>
+                    </div>
+                    <div class="feature-card hidden">
                         <div class="icon">🔄</div>
                         <h3>Continuous Monitoring</h3>
                         <p>Set custom intervals to keep your services alive and get instant status feedback.</p>
-                    </div>
-                    <div class="feature-card hidden">
-                        <div class="icon">🐧</div>
-                        <h3>Broad Linux Support</h3>
-                        <p>Works seamlessly on major distributions like Debian, Ubuntu, and Arch Linux.</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- प्रॉम्प्ट डालने का सेक्शन -->
-        <section id="prompt-area" class="section">
+        <!-- कैसे उपयोग करें सेक्शन -->
+        <section id="usage" class="section usage-section">
             <div class="container">
-                <h2>Developer Prompts</h2>
+                <h2 class="hidden">How to Use</h2>
                 
-                <!-- 
-                ======================================================================================
-                !!!  यहीं पर आपको मॉडिफाई करना है  !!!
-                ======================================================================================
-                नीचे दिए गए 'prompt-placeholder' div के अंदर, आप अपने प्रॉम्प्ट्स, कोड स्निपेट्स,
-                या कोई भी जानकारी डाल सकते हैं जो आप दिखाना चाहते हैं।
-                आप इस div को हटाकर अपनी खुद की HTML संरचना (structure) भी बना सकते हैं।
-                यह क्षेत्र विशेष रूप से आपके लिए खाली छोड़ा गया है।
-                ======================================================================================
-                -->
-                
-                <div class="prompt-placeholder hidden">
-                    <h3>Your Prompts Here</h3>
-                    <p>This section is ready for you to customize. You can add your Python, Shell, or AI image generation prompts here. Edit the index.html file to get started.</p>
-                    <!-- उदाहरण: <pre><code>आप यहाँ अपना कोड डाल सकते हैं...</code></pre> -->
+                <div class="hidden">
+                    <h3>CLI Version (Command-Line)</h3>
+                    <p>After installation, you can run PingerPro directly from your terminal. This is ideal for servers and automation.</p>
+                    <pre><code># Basic usage (pings every 30 seconds by default)
+pingerpro-cli https://your-website-to-monitor.com
+
+# Ping every 10 seconds
+pingerpro-cli https://your-website-to-monitor.com -i 10
+
+# Silent mode (only shows status changes and errors)
+pingerpro-cli https://your-website-to-monitor.com -s</code></pre>
                 </div>
                 
-                <!-- ========================== END OF MODIFICATION AREA ========================== -->
-                
+                <div class="hidden">
+                    <h3>GUI Version (Desktop App)</h3>
+                    <p>For a graphical experience, simply run the GUI command. A window will open, allowing you to enter the URL and interval easily.</p>
+                    <pre><code># Just run this command to launch the app
+pingerpro-gui</code></pre>
+                </div>
+
             </div>
         </section>
 
     </main>
 
+    <!-- फुटर -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PingerPro. Created with passion.</p>
+        </div>
+    </footer>
+
     <!-- JavaScript कोड -->
     <script>
-        // --- 1. कॉपी-टू-क्लिपबोर्ड फंक्शन ---
-        function copyToClipboard() {
-            const commandText = document.getElementById('install-command').innerText;
-            const copyButton = document.querySelector('.copy-btn');
-            
+        // --- 1. कॉपी-टू-क्लिपबोर्ड फंक्शन (अपडेटेड) ---
+        function copyToClipboard(elementId, buttonElement) {
+            const commandText = document.getElementById(elementId).innerText;
+            const originalText = buttonElement.innerText;
+            const originalColor = buttonElement.style.backgroundColor;
+
             navigator.clipboard.writeText(commandText).then(() => {
-                // सफलता पर
-                copyButton.innerText = 'Copied!';
+                buttonElement.innerText = 'Copied!';
+                buttonElement.style.background = '#28a745';
                 setTimeout(() => {
-                    copyButton.innerText = 'Copy';
-                }, 2000); // 2 सेकंड बाद टेक्स्ट वापस बदलें
+                    buttonElement.innerText = originalText;
+                    buttonElement.style.background = originalColor;
+                }, 2000);
             }, (err) => {
-                // विफलता पर
                 console.error('Could not copy text: ', err);
-                copyButton.innerText = 'Failed';
+                buttonElement.innerText = 'Failed';
+                buttonElement.style.background = '#dc3545';
                 setTimeout(() => {
-                    copyButton.innerText = 'Copy';
+                    buttonElement.innerText = originalText;
+                    buttonElement.style.background = originalColor;
                 }, 2000);
             });
         }
@@ -305,10 +255,9 @@
                     }
                 });
             }, {
-                threshold: 0.1 // 10% दिखने पर एनिमेशन शुरू करें
+                threshold: 0.1
             });
 
-            // सभी 'hidden' क्लास वाले एलिमेंट्स को चुनें और निरीक्षण करें
             const hiddenElements = document.querySelectorAll('.hidden');
             hiddenElements.forEach(el => observer.observe(el));
         });
