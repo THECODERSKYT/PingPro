@@ -95,38 +95,6 @@ fi
 
 # --- Installation Functions ---
 
-install_dependencies() {
-    local type=$1 # cli or gui
-    
-    step "Step 1: Installing System Dependencies for ${DISTRO}"
-    
-    case "$PKG_MANAGER" in
-        "apt-get")
-            run "Updating package lists" $SUDO_CMD apt-get update -y
-            run "Installing Python & Pip" $SUDO_CMD apt-get install -y python3 python3-pip curl
-            if [ "$type" == "gui" ]; then
-                run "Installing GUI libraries (GTK)" $SUDO_CMD apt-get install -y python3-gi python3-gi-cairo gir1.2-gtk-3.0
-            fi
-            ;;
-        "pacman")
-            run "Updating package lists" $SUDO_CMD pacman -Syu --noconfirm
-            run "Installing Python & Pip" $SUDO_CMD pacman -S --noconfirm python python-pip curl
-            # !!!!!!!!!!! THE FIX IS HERE !!!!!!!!!!!
-            # Added the missing 'then' keyword
-            if [ "$type" == "gui" ]; then
-                run "Installing GUI libraries (GTK)" $SUDO_CMD pacman -S --noconfirm python-gobject gtk3
-            fi
-            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            ;;
-        "pkg") # Termux
-            run "Updating package lists" pkg update -y
-            run "Installing Python & Curl" pkg install -y python curl
-            run "Upgrading Pip" $PYTHON_CMD -m pip install --upgrade pip
-            ;;
-    esac
-    
-    run "Installing 'requests' library via Pip" $SUDO_CMD $PYTHON_CMD -m pip install requests
-}
 
 install_app() {
     local type=$1
@@ -143,7 +111,35 @@ install_app() {
 
 # --- Main Script Execution ---
 
-# 1. Display beautiful header
+# 1. Diinstall_dependencies() {
+    local type=$1 # cli or gui
+    
+    step "Step 1: Installing System Dependencies for ${DISTRO}"
+    
+    case "$PKG_MANAGER" in
+        "apt-get")
+            run "Updating package lists" $SUDO_CMD apt-get update -y
+            run "Installing Python & Pip" $SUDO_CMD apt-get install -y python3 python3-pip curl
+            if [ "$type" == "gui" ]; then
+                run "Installing GUI libraries (GTK)" $SUDO_CMD apt-get install -y python3-gi python3-gi-cairo gir1.2-gtk-3.0
+            fi
+            ;;
+        "pacman")
+            run "Updating package lists" $SUDO_CMD pacman -Syu --noconfirm
+            run "Installing Python & Pip" $SUDO_CMD pacman -S --noconfirm python python-pip curl
+            if [ "$type" == "gui" ]; then
+                run "Installing GUI libraries (GTK)" $SUDO_CMD pacman -S --noconfirm python-gobject gtk3
+            fi
+            ;;
+        "pkg") # Termux
+            run "Updating package lists" pkg update -y
+            run "Installing Python & Curl" pkg install -y python curl
+            # "Upgrading Pip" line has been removed as it's forbidden in Termux.
+            ;;
+    esac
+    
+    run "Installing 'requests' library via Pip" $SUDO_CMD $PYTHON_CMD -m pip install requests
+} display beautiful header
 clear
 cat << "EOF"
   _____  _                              _____           
