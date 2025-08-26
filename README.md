@@ -15,7 +15,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/THECODERSKYT/PingPro?style=social)](https://github.com/THECODERSKYT/PingPro/network/members)
 
 **Live Website & Installer: [pingpro.vercel.app](https://pingpro.vercel.app/)**
-
+**Alternative website (same): [pingerpro.vercel.app](https://pingerpro.vercel.app/)**
 > **Note:** PingerPro is also available as a dedicated **Android app!** 📱
 
 ---
